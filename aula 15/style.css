@@ -1,0 +1,44 @@
+*{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+body{
+    background-image: url('paisagem.jpg');
+    background-size: auto;      
+    background-position: center; 
+    background-repeat: no-repeat; 
+    background-attachment: fixed; 
+    width: 100vw;                 
+    height: 100vh;                
+}
+#container > h1{
+    color: white;
+}
+
+h1{
+    color: aliceblue;
+    margin-top: 20px;
+}
+
+#container > div > label{
+    color: white;
+}
+
+#container > div > input{
+    border: transparent;
+}
+
+#container{
+    height: 70%;
+    width: 40%;
+    margin-top: 75px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border: 1px solid white;
+    border-radius: 20px;
+    padding: 20px;
+    background: transparent;
+    backdrop-filter: blur(20px);
+}
+

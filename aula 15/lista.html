@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a id="link-consulta-cadastrados" class="btn btn-secondary" href="index.html">Cadastrar</a>
+  <div class="d-flex justify-content-center align-items-center w-100 h-70 flex-column">
+    <h1>Lista Cadastrados</h1>
+    <table class="table table-striped w-50 h-50">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Idade</th>
+            <th scope="col">Profissão</th>
+            <th scope="col">Email</th>
+            <th scope="col">Ação</th>
+            <th scope="col">Dados</th>
+          </tr>
+        </thead>
+        <tbody id="tbody">
+        </tbody>
+      </table>
+    </div>
+   
+
+     
+
+     <div class="modal fade" id="modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+       <div class="modal-dialog">
+         <div class="modal-content">
+           <div class="modal-header">
+             <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1>
+             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+           </div>
+           <div class="modal-body">
+            id: <input type="text" id="id-modal" name="id" /><br />
+            Nome: <input type="text" id="nome-modal" name="nome" /><br />
+            Idade: <input type="text" id="idade-modal" value="" name="idade" /><br />
+            Profissao: <input type="text" id="profissao-modal" name="profissao" /><br />
+            E-mail: <input type="email" id="email-modal" name="email_usuario" /><br />
+           </div>
+           <div class="modal-footer">
+            
+            <button onclick="editar()" class="btn btn-primary">Salvar</button>
+             
+            
+           </div>
+         </div>
+       </div>
+     </div>
+       </div>
+
+      <script>
+        const list_keys = Object.keys(localStorage);
+
+        list_keys.forEach(
+          (i)=>{
+              console.log(i)
+            let pessoa = JSON.parse(localStorage.getItem(i));
+            let linha = document.createElement('tr');
+            let td_id = document.createElement('td');
+            let td_nome = document.createElement('td');
+            let td_idade = document.createElement('td');
+            let td_profissao = document.createElement('td');
+            let td_email = document.createElement('td');
+            let td_acao = document.createElement('td');
+            let button_acao = document.createElement('button');
+            let td_dados = document.createElement('td');
+            let button_dados = document.createElement('button');
+            let button_ok = document.createElement("button")
+          
+            td_id.textContent = i;  
+            td_nome.textContent = pessoa.nome;
+            td_idade.textContent = pessoa.idade;
+            td_profissao.textContent = pessoa.profissao;
+            td_email.textContent = pessoa.email;
+            button_acao.textContent = "Apagar";
+            button_acao.classList = "btn btn-primary";
+            button_acao.addEventListener('click',
+              function(){
+               localStorage.removeItem(i);
+              linha.remove(i)
+              }
+            );
+            button_dados.textContent = "Atualizar";
+            button_dados.classList = "btn btn-secondary";
+            button_dados.addEventListener('click',
+              function(){
+                
+                var galleryModal = new bootstrap.Modal(document.getElementById('modal'), {
+              
+                });
+                galleryModal.show();  
+                let pessoamodal = JSON.parse(localStorage.getItem(i));
+                document.getElementById('nome-modal').value = pessoamodal.nome;
+                document.getElementById('idade-modal').value = pessoamodal.idade;
+                document.getElementById('profissao-modal').value = pessoamodal.profissao;
+                document.getElementById('email-modal').value = pessoamodal.email;
+                document.getElementById('id-modal').value = i;
+              }   
+            );
+
+            linha.appendChild(td_id);
+            linha.appendChild(td_nome);
+            linha.appendChild(td_idade);
+            linha.appendChild(td_profissao);
+            linha.appendChild(td_email);
+            linha.appendChild(td_acao);
+            linha.appendChild(td_dados)
+
+            td_acao.appendChild(button_acao);
+            td_dados.appendChild(button_dados);
+
+
+            let tabela = document.getElementById('tbody');
+            tabela.appendChild(linha);
+          }
+        );
+        
+
+        
+
+        
+
+    </script> 
+    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>    
+</body>
+</html>
